@@ -1,0 +1,481 @@
+import { ExternalComponent } from '../types/scrap';
+
+export const EXTERNAL_HARDWARE_DATABASE: ExternalComponent[] = [
+  {
+    id: 'ext-ne555',
+    partNumber: 'NE555 / SA555 / LM555',
+    name: 'NE555 Precision Timer IC',
+    category: 'ic',
+    packageType: 'DIP-8 / SOIC-8',
+    description: 'The world\'s most popular analog timer IC. Generates precise timing delays and oscillations in monostable or astable multivibrator circuits.',
+    keySpecs: {
+      'Supply Voltage': '4.5V to 16V DC',
+      'Max Output Current': '200 mA',
+      'Operating Frequency': 'Up to 500 kHz',
+      'Quiescent Current': '3 - 6 mA'
+    },
+    pinCount: 8,
+    pinout: [
+      { pin: 1, name: 'GND', type: 'ground', desc: 'Ground reference 0V' },
+      { pin: 2, name: 'TRIG', type: 'input', desc: 'Trigger input (< 1/3 Vcc starts output HIGH)' },
+      { pin: 3, name: 'OUT', type: 'output', desc: 'High-current output pin (sources/sinks 200mA)' },
+      { pin: 4, name: 'RESET', type: 'input', desc: 'Active-low reset (tie to VCC when not in use)' },
+      { pin: 5, name: 'CTRL', type: 'analog', desc: 'Control voltage divider tap (bypass with 10nF)' },
+      { pin: 6, name: 'THRESH', type: 'input', desc: 'Threshold input (> 2/3 Vcc sets output LOW)' },
+      { pin: 7, name: 'DISCH', type: 'output', desc: 'Discharge pin (open-collector internal NPN)' },
+      { pin: 8, name: 'VCC', type: 'power', desc: 'Positive supply rail (+4.5V to +16V)' }
+    ],
+    commonSources: 'Old CRT monitors, toy sound generators, alarm sirens, microwave oven control panels, car flashers.',
+    equivalents: ['LM555', 'TLC555 (CMOS low power)', 'SE555', 'NE556 (Dual 555 in DIP-14)'],
+    datasheetUrl: 'https://www.ti.com/lit/ds/symlink/ne555.pdf',
+    salvageTips: 'Easy to desolder with solder wick or pump. CMOS versions (TLC555) work down to 2V and draw microamps.',
+    typicalSalvagePrice: 0.8
+  },
+  {
+    id: 'ext-lm358',
+    partNumber: 'LM358 / LM358P / LM358N',
+    name: 'Dual General Purpose Operational Amplifier',
+    category: 'ic',
+    packageType: 'DIP-8 / SOIC-8',
+    description: 'Classic dual single-supply op-amp capable of operating directly from ground rail. Ideal for sensor pre-amps, active filters, and comparators.',
+    keySpecs: {
+      'Supply Voltage': '3V to 32V (single) or ±1.5V to ±16V (dual)',
+      'Bandwidth': '1.0 MHz unity gain',
+      'Input Common Mode': 'Includes ground rail (0V)',
+      'Supply Current': '500 µA total'
+    },
+    pinCount: 8,
+    pinout: [
+      { pin: 1, name: 'OUT1', type: 'output', desc: 'Amplifier 1 Output' },
+      { pin: 2, name: 'IN1-', type: 'input', desc: 'Amplifier 1 Inverting Input' },
+      { pin: 3, name: 'IN1+', type: 'input', desc: 'Amplifier 1 Non-Inverting Input' },
+      { pin: 4, name: 'GND', type: 'ground', desc: 'Ground / Negative Rail (V-)' },
+      { pin: 5, name: 'IN2+', type: 'input', desc: 'Amplifier 2 Non-Inverting Input' },
+      { pin: 6, name: 'IN2-', type: 'input', desc: 'Amplifier 2 Inverting Input' },
+      { pin: 7, name: 'OUT2', type: 'output', desc: 'Amplifier 2 Output' },
+      { pin: 8, name: 'VCC', type: 'power', desc: 'Positive Supply Rail (V+)' }
+    ],
+    commonSources: 'PC motherboards, audio mixers, power supplies, battery chargers, industrial automation sensors.',
+    equivalents: ['LM2904', 'LM324 (Quad version in DIP-14)', 'TL072 (lower noise audio JFET)', 'MCP6002 (Rail-to-rail)'],
+    datasheetUrl: 'https://www.ti.com/lit/ds/symlink/lm358.pdf',
+    salvageTips: 'Very robust against ESD. Check offset voltage with unity-gain buffer configuration before critical analog use.',
+    typicalSalvagePrice: 1.2
+  },
+  {
+    id: 'ext-74hc595',
+    partNumber: '74HC595 / SN74HC595N',
+    name: '8-Bit Serial-In / Parallel-Out Shift Register with Latch',
+    category: 'ic',
+    packageType: 'DIP-16 / SOIC-16',
+    description: 'The premier GPIO expansion chip. Allows 3 microcontroller pins to control 8 outputs (or daisy-chain to drive 64+ LEDs, relays, and displays).',
+    keySpecs: {
+      'Operating Voltage': '2.0V to 6.0V DC',
+      'Drive Current': '±35 mA per output pin',
+      'Shift Frequency': 'Up to 100 MHz at 4.5V',
+      'Outputs': 'Tri-state parallel latch'
+    },
+    pinCount: 16,
+    pinout: [
+      { pin: 1, name: 'QB (Q1)', type: 'output', desc: 'Parallel Data Output 1' },
+      { pin: 2, name: 'QC (Q2)', type: 'output', desc: 'Parallel Data Output 2' },
+      { pin: 3, name: 'QD (Q3)', type: 'output', desc: 'Parallel Data Output 3' },
+      { pin: 4, name: 'QE (Q4)', type: 'output', desc: 'Parallel Data Output 4' },
+      { pin: 5, name: 'QF (Q5)', type: 'output', desc: 'Parallel Data Output 5' },
+      { pin: 6, name: 'QG (Q6)', type: 'output', desc: 'Parallel Data Output 6' },
+      { pin: 7, name: 'QH (Q7)', type: 'output', desc: 'Parallel Data Output 7' },
+      { pin: 8, name: 'GND', type: 'ground', desc: 'Ground 0V' },
+      { pin: 9, name: 'QH_PRIME', type: 'output', desc: 'Serial Data Out (for cascading next 595)' },
+      { pin: 10, name: 'MR#', type: 'input', desc: 'Master Reset (Active LOW, pull to VCC)' },
+      { pin: 11, name: 'SH_CP', type: 'input', desc: 'Shift Register Clock' },
+      { pin: 12, name: 'ST_CP', type: 'input', desc: 'Storage Latch Clock' },
+      { pin: 13, name: 'OE#', type: 'input', desc: 'Output Enable (Active LOW, ground to enable)' },
+      { pin: 14, name: 'DS', type: 'input', desc: 'Serial Data Input' },
+      { pin: 15, name: 'QA (Q0)', type: 'output', desc: 'Parallel Data Output 0' },
+      { pin: 16, name: 'VCC', type: 'power', desc: 'Supply Voltage (+5V)' }
+    ],
+    commonSources: 'Dot-matrix LED signs, appliance front panel displays, pinball machines, CNC controller boards.',
+    equivalents: ['CD74HCT595', 'TPIC6C595 (High-current power DMOS driver)', 'MAX7219 (dedicated LED driver)'],
+    datasheetUrl: 'https://www.ti.com/lit/ds/symlink/sn74hc595.pdf',
+    salvageTips: 'Always tie MR# (pin 10) to VCC and OE# (pin 13) to GND if not explicitly toggling them.',
+    typicalSalvagePrice: 1.5
+  },
+  {
+    id: 'ext-cd4017',
+    partNumber: 'CD4017BE / HCF4017',
+    name: 'CMOS Decade Counter with 10 Decoded Outputs',
+    category: 'ic',
+    packageType: 'DIP-16 / SOIC-16',
+    description: 'Classic 5-stage Johnson counter. Advances one of 10 sequential outputs on each incoming clock pulse. Ideal for LED sequencers, chasers, and frequency dividers.',
+    keySpecs: {
+      'Operating Voltage': '3V to 18V DC',
+      'Clock Frequency': 'Up to 5 MHz at 10V',
+      'Output Channels': '10 mutually exclusive active-high outputs',
+      'Reset & Inhibit': 'Direct hardware reset and clock enable'
+    },
+    pinCount: 16,
+    pinout: [
+      { pin: 1, name: 'Q5', type: 'output', desc: 'Output 5' },
+      { pin: 2, name: 'Q1', type: 'output', desc: 'Output 1' },
+      { pin: 3, name: 'Q0', type: 'output', desc: 'Output 0' },
+      { pin: 4, name: 'Q2', type: 'output', desc: 'Output 2' },
+      { pin: 5, name: 'Q6', type: 'output', desc: 'Output 6' },
+      { pin: 6, name: 'Q7', type: 'output', desc: 'Output 7' },
+      { pin: 7, name: 'Q3', type: 'output', desc: 'Output 3' },
+      { pin: 8, name: 'VSS', type: 'ground', desc: 'Ground 0V' },
+      { pin: 9, name: 'Q8', type: 'output', desc: 'Output 8' },
+      { pin: 10, name: 'Q4', type: 'output', desc: 'Output 4' },
+      { pin: 11, name: 'Q9', type: 'output', desc: 'Output 9' },
+      { pin: 12, name: 'CARRY', type: 'output', desc: 'Carry-out output (divide-by-10)' },
+      { pin: 13, name: 'CLK_INH', type: 'input', desc: 'Clock Inhibit (ground to allow counting)' },
+      { pin: 14, name: 'CLK', type: 'input', desc: 'Clock Input (trigger on rising edge)' },
+      { pin: 15, name: 'RESET', type: 'input', desc: 'Master Reset (ground during count, pulse HIGH to reset)' },
+      { pin: 16, name: 'VDD', type: 'power', desc: 'Supply Voltage (+3V to +18V)' }
+    ],
+    commonSources: 'Alarm system control boards, novelty flashing LED toys, automotive turn indicators, disco light controllers.',
+    equivalents: ['HEF4017B', 'MC14017B', '74HC4017'],
+    datasheetUrl: 'https://www.ti.com/lit/ds/symlink/cd4017b.pdf',
+    salvageTips: 'Pairs seamlessly with NE555 timer. Note the non-sequential pin numbering (pins 3, 2, 4, 7, 10, 1, 5, 6, 9, 11).',
+    typicalSalvagePrice: 1.1
+  },
+  {
+    id: 'ext-uln2003',
+    partNumber: 'ULN2003A / ULN2003APG',
+    name: 'High-Voltage High-Current 7-Channel Darlington Transistor Array',
+    category: 'ic',
+    packageType: 'DIP-16 / SOP-16',
+    description: 'Seven open-collector Darlington pairs with common clamp diodes. Designed to switch relays, solenoids, DC motors, and 28BYJ-48 unipolar stepper motors from 3.3V/5V logic.',
+    keySpecs: {
+      'Collector-Emitter Voltage': '50V Max',
+      'Continuous Output Current': '500 mA per channel (can parallel channels)',
+      'Input Logic': 'TTL and 5V CMOS compatible with 2.7kΩ base resistor',
+      'Built-in Protection': 'Suppression flyback diodes on pin 9 (COM)'
+    },
+    pinCount: 16,
+    pinout: [
+      { pin: 1, name: '1B', type: 'input', desc: 'Channel 1 Logic Input' },
+      { pin: 2, name: '2B', type: 'input', desc: 'Channel 2 Logic Input' },
+      { pin: 3, name: '3B', type: 'input', desc: 'Channel 3 Logic Input' },
+      { pin: 4, name: '4B', type: 'input', desc: 'Channel 4 Logic Input' },
+      { pin: 5, name: '5B', type: 'input', desc: 'Channel 5 Logic Input' },
+      { pin: 6, name: '6B', type: 'input', desc: 'Channel 6 Logic Input' },
+      { pin: 7, name: '7B', type: 'input', desc: 'Channel 7 Logic Input' },
+      { pin: 8, name: 'E', type: 'ground', desc: 'Common Emitter (Ground)' },
+      { pin: 9, name: 'COM', type: 'power', desc: 'Common cathode clamp diode (connect to load V+)' },
+      { pin: 10, name: '7C', type: 'output', desc: 'Channel 7 Collector Output' },
+      { pin: 11, name: '6C', type: 'output', desc: 'Channel 6 Collector Output' },
+      { pin: 12, name: '5C', type: 'output', desc: 'Channel 5 Collector Output' },
+      { pin: 13, name: '4C', type: 'output', desc: 'Channel 4 Collector Output' },
+      { pin: 14, name: '3C', type: 'output', desc: 'Channel 3 Collector Output' },
+      { pin: 15, name: '2C', type: 'output', desc: 'Channel 2 Collector Output' },
+      { pin: 16, name: '1C', type: 'output', desc: 'Channel 1 Collector Output' }
+    ],
+    commonSources: 'Inkjet printers, photocopiers, microwave turntable driver boards, HVAC motorized louvers.',
+    equivalents: ['ULN2004 (for 6-15V CMOS)', 'ULN2803 (8-channel version in DIP-18)', 'TBD62003 (DMOS FET replacement)'],
+    datasheetUrl: 'https://www.st.com/resource/en/datasheet/uln2003.pdf',
+    salvageTips: 'Never leave pin 9 (COM) floating when driving inductive loads like motors or relays!',
+    typicalSalvagePrice: 1.4
+  },
+  {
+    id: 'ext-esp32',
+    partNumber: 'ESP32-WROOM-32 / ESP32-D0WD',
+    name: 'Espressif Dual-Core 240MHz Wi-Fi & Bluetooth MCU',
+    category: 'ic',
+    packageType: 'QFN-48 / SMD Module 38-pin',
+    description: 'High-performance IoT powerhouse with Xtensa LX6 dual cores, 2.4 GHz Wi-Fi 802.11 b/g/n, Bluetooth v4.2 BR/EDR and BLE. Supports Arduino C++ and MicroPython.',
+    keySpecs: {
+      'CPU Speed': 'Up to 240 MHz Dual Core',
+      'Memory': '520 KB SRAM, 4MB / 8MB SPI Flash',
+      'Wireless': 'Wi-Fi 802.11 b/g/n + BLE 4.2',
+      'Operating Voltage': '3.0V to 3.6V (3.3V nominal)',
+      'Peripherals': 'Capacitive touch, ADCs, DACs, I2C, SPI, UART, PWM, CAN/TWAI'
+    },
+    pinCount: 38,
+    pinout: [
+      { pin: 1, name: '3V3', type: 'power', desc: '3.3V Power Supply (needs 500mA peak)' },
+      { pin: 2, name: 'EN / RST', type: 'input', desc: 'Chip Enable / Reset (Pullup to 3.3V)' },
+      { pin: 3, name: 'VP / GPIO36', type: 'analog', desc: 'ADC1_CH0 (Input only)' },
+      { pin: 4, name: 'VN / GPIO39', type: 'analog', desc: 'ADC1_CH3 (Input only)' },
+      { pin: 5, name: 'GPIO34', type: 'input', desc: 'ADC1_CH6 (Input only, no pullup)' },
+      { pin: 6, name: 'GPIO35', type: 'input', desc: 'ADC1_CH7 (Input only, no pullup)' },
+      { pin: 7, name: 'GPIO32', type: 'io', desc: 'ADC1_CH4, Touch 9, 32.768kHz crystal' },
+      { pin: 8, name: 'GPIO33', type: 'io', desc: 'ADC1_CH5, Touch 8' },
+      { pin: 9, name: 'GPIO25', type: 'io', desc: 'DAC1, ADC2_CH8' },
+      { pin: 10, name: 'GPIO26', type: 'io', desc: 'DAC2, ADC2_CH9' },
+      { pin: 11, name: 'GPIO27', type: 'io', desc: 'ADC2_CH7, Touch 7' },
+      { pin: 12, name: 'GPIO14', type: 'io', desc: 'HSPI_CLK, ADC2_CH6, Touch 6' },
+      { pin: 13, name: 'GPIO12', type: 'io', desc: 'Boot strapping pin (Must be LOW at boot)' },
+      { pin: 14, name: 'GND', type: 'ground', desc: 'Common Ground' },
+      { pin: 15, name: 'GPIO13', type: 'io', desc: 'HSPI_ID, ADC2_CH4, Touch 4' },
+      { pin: 16, name: 'GPIO9 (D2)', type: 'io', desc: 'Connected to SPI Flash (do not use)' },
+      { pin: 17, name: 'GPIO10 (D3)', type: 'io', desc: 'Connected to SPI Flash (do not use)' },
+      { pin: 18, name: 'GPIO11 (CMD)', type: 'io', desc: 'Connected to SPI Flash (do not use)' },
+      { pin: 19, name: 'GPIO21', type: 'io', desc: 'Default I2C SDA' },
+      { pin: 20, name: 'GPIO22', type: 'io', desc: 'Default I2C SCL' }
+    ],
+    commonSources: 'Smart home plugs (Sonoff, Tuya), broken IoT LED strips, old robot vacuum logic boards, ESP32 dev boards.',
+    equivalents: ['ESP32-S3', 'ESP32-C3 (RISC-V)', 'ESP8266 (Single core 80MHz)', 'Raspberry Pi Pico W'],
+    datasheetUrl: 'https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32_datasheet_en.pdf',
+    salvageTips: 'Add a 10µF + 100nF capacitor close to 3V3 rail to prevent brownout crashes during Wi-Fi transmit bursts.',
+    typicalSalvagePrice: 4.5
+  },
+  {
+    id: 'ext-atmega328p',
+    partNumber: 'ATmega328P-PU / ATmega328P-AU',
+    name: 'Microchip / Atmel 8-bit AVR Microcontroller (Arduino Uno/Nano Heart)',
+    category: 'ic',
+    packageType: 'DIP-28 / TQFP-32',
+    description: 'The legendary microcontroller powering Arduino Uno, Nano, and Pro Mini. 32KB ISP Flash, 2KB SRAM, 1KB EEPROM, operating up to 20MHz with hardware PWM, ADC, and UART.',
+    keySpecs: {
+      'Clock Speed': 'Up to 20 MHz (16 MHz standard at 5V)',
+      'Operating Voltage': '1.8V to 5.5V DC',
+      'Flash Memory': '32 KB (with 0.5KB bootloader)',
+      'I/O Lines': '23 programmable pins',
+      'ADC': '10-bit resolution 6/8 channels'
+    },
+    pinCount: 28,
+    pinout: [
+      { pin: 1, name: 'PC6 / RESET', type: 'input', desc: 'Active-low reset (pullup 10k to 5V)' },
+      { pin: 2, name: 'PD0 / RXD', type: 'io', desc: 'USART Serial Receiver (Arduino D0)' },
+      { pin: 3, name: 'PD1 / TXD', type: 'io', desc: 'USART Serial Transmitter (Arduino D1)' },
+      { pin: 4, name: 'PD2 / INT0', type: 'io', desc: 'External Interrupt 0 (Arduino D2)' },
+      { pin: 5, name: 'PD3 / OC2B', type: 'io', desc: 'PWM Output (Arduino D3)' },
+      { pin: 6, name: 'PD4', type: 'io', desc: 'Digital I/O (Arduino D4)' },
+      { pin: 7, name: 'VCC', type: 'power', desc: '+5V Power Rail' },
+      { pin: 8, name: 'GND', type: 'ground', desc: 'Ground 0V' },
+      { pin: 9, name: 'PB6 / XTAL1', type: 'input', desc: '16MHz Crystal Oscillator Input' },
+      { pin: 10, name: 'PB7 / XTAL2', type: 'output', desc: '16MHz Crystal Oscillator Output' },
+      { pin: 11, name: 'PD5 / OC0B', type: 'io', desc: 'PWM Output (Arduino D5)' },
+      { pin: 12, name: 'PD6 / OC0A', type: 'io', desc: 'PWM Output (Arduino D6)' },
+      { pin: 13, name: 'PD7', type: 'io', desc: 'Digital I/O (Arduino D7)' },
+      { pin: 14, name: 'PB0', type: 'io', desc: 'Digital I/O (Arduino D8)' },
+      { pin: 20, name: 'AVCC', type: 'power', desc: 'Analog Supply Voltage (connect to VCC)' },
+      { pin: 22, name: 'GND', type: 'ground', desc: 'Analog Ground' },
+      { pin: 27, name: 'PC4 / SDA', type: 'io', desc: 'I2C Data line (Arduino A4)' },
+      { pin: 28, name: 'PC5 / SCL', type: 'io', desc: 'I2C Clock line (Arduino A5)' }
+    ],
+    commonSources: 'Old 3D printer motherboards, automotive diagnostic tools, Arduino clones, battery monitors.',
+    equivalents: ['ATmega88', 'ATmega168', 'LGT8F328P (LogicGreen enhanced clone)', 'ATtiny85 (compact 8-pin)'],
+    datasheetUrl: 'https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf',
+    salvageTips: 'DIP-28 packages can be easily popped out of sockets and reused with minimal external 16MHz crystal + 22pF caps.',
+    typicalSalvagePrice: 3.2
+  },
+  {
+    id: 'ext-tp4056',
+    partNumber: 'TP4056 / TC4056A',
+    name: '1A Constant-Current/Constant-Voltage Linear Li-Ion Battery Charger',
+    category: 'power',
+    packageType: 'SOP-8 / Board Module',
+    description: 'The standard DIY lithium charging chip. Charges 3.7V/4.2V 18650 cells with programmable current up to 1000mA via Rprog resistor. Modules usually include DW01A protection IC.',
+    keySpecs: {
+      'Input Voltage': '4.0V to 8.0V (5V USB standard)',
+      'Charge Voltage': '4.2V ± 1% accuracy',
+      'Programmable Current': 'Up to 1000 mA (set by pin 2 resistor)',
+      'Protection': 'Thermal regulation, automatic recharge cycle'
+    },
+    pinCount: 8,
+    pinout: [
+      { pin: 1, name: 'TEMP', type: 'input', desc: 'NTC thermistor input (connect to GND if unused)' },
+      { pin: 2, name: 'PROG', type: 'analog', desc: 'Charge current programming (1.2kΩ = 1000mA, 10kΩ = 130mA)' },
+      { pin: 3, name: 'GND', type: 'ground', desc: 'Negative supply & battery ground' },
+      { pin: 4, name: 'VCC', type: 'power', desc: 'Input power supply (+5V from USB)' },
+      { pin: 5, name: 'BAT', type: 'power', desc: 'Battery positive terminal (+4.2V)' },
+      { pin: 6, name: 'STDBY#', type: 'output', desc: 'Full charge status indicator LED (Green)' },
+      { pin: 7, name: 'CHRG#', type: 'output', desc: 'Charging cycle in progress LED (Red)' },
+      { pin: 8, name: 'CE', type: 'input', desc: 'Chip enable input (pull HIGH to VCC)' }
+    ],
+    commonSources: 'Power banks, Bluetooth speakers, portable vape devices, rechargeable flashlights.',
+    equivalents: ['MCP73831', 'IP5306 (charger + boost combined)', 'TP4057 (dual LED in SOT-23-6)'],
+    datasheetUrl: 'https://dlnmh9ip6v2uc.cloudfront.net/datasheets/Prototyping/TP4056.pdf',
+    salvageTips: 'For small LiPo cells (< 500mAh), desolder the default 1.2kΩ surface mount resistor on pin 2 and replace with 2.4kΩ or 5kΩ.',
+    typicalSalvagePrice: 1.0
+  },
+  {
+    id: 'ext-irfz44n',
+    partNumber: 'IRFZ44N / IRLZ44N',
+    name: '55V 49A N-Channel Power MOSFET',
+    category: 'power',
+    packageType: 'TO-220AB',
+    description: 'Extremely rugged N-channel HEXFET power transistor. Extremely low Rds(on) of 17.5mΩ. Powers high-current DC motors, heated beds, solar dumps, and high-wattage LED arrays.',
+    keySpecs: {
+      'Drain-to-Source Voltage (Vds)': '55 V Max',
+      'Continuous Drain Current (Id)': '49 A (at 25°C with heatsink)',
+      'Rds(on)': '0.0175 Ω (17.5 mΩ)',
+      'Gate Threshold Voltage (Vgs(th))': '2.0V to 4.0V (IRLZ44N is logic level)'
+    },
+    pinCount: 3,
+    pinout: [
+      { pin: 1, name: 'GATE', type: 'input', desc: 'Gate Control Terminal (isolated SiO2 layer)' },
+      { pin: 2, name: 'DRAIN', type: 'power', desc: 'Drain Terminal (also connected to metal tab)' },
+      { pin: 3, name: 'SOURCE', type: 'ground', desc: 'Source Terminal (connect to GND)' }
+    ],
+    commonSources: 'Dead ATX PC power supplies, car audio amplifiers, electric scooter speed controllers, uninterruptible power supplies (UPS).',
+    equivalents: ['IRF3205 (110A 55V)', 'IRF540N (100V 33A)', 'STP55NF06', 'IRLZ44N (direct 3.3V/5V logic drive)'],
+    datasheetUrl: 'https://www.infineon.com/dgdl/irfz44n.pdf?fileId=5546d462533600a40153563b3a9f220d',
+    salvageTips: 'Always place a 10kΩ pulldown resistor between Gate and Source to prevent parasitic latch-up during power transitions.',
+    typicalSalvagePrice: 2.5
+  },
+  {
+    id: 'ext-l298n',
+    partNumber: 'L298N / L298HN',
+    name: 'Dual Full-Bridge Motor Driver',
+    category: 'motor',
+    packageType: 'Multiwatt15 (15-pin TO-220 form)',
+    description: 'High-voltage, high-current dual full-bridge driver designed to accept standard TTL logic levels and drive inductive loads such as relays, solenoids, DC and bipolar stepper motors.',
+    keySpecs: {
+      'Operating Supply Voltage (Vs)': 'Up to 46 V DC',
+      'Total DC Current': '4 A (2 A per channel continuous)',
+      'Logic Supply Voltage (Vss)': '4.5V to 7V DC',
+      'Over-temperature Protection': 'Thermal shutdown with sensing resistors'
+    },
+    pinCount: 15,
+    pinout: [
+      { pin: 1, name: 'CURRENT SENSE A', type: 'analog', desc: 'Sense resistor connection for Bridge A' },
+      { pin: 2, name: 'OUT1', type: 'output', desc: 'Motor A Lead 1' },
+      { pin: 3, name: 'OUT2', type: 'output', desc: 'Motor A Lead 2' },
+      { pin: 4, name: 'VS', type: 'power', desc: 'Motor Power Supply (+12V to +36V)' },
+      { pin: 5, name: 'IN1', type: 'input', desc: 'Bridge A Direction Input 1' },
+      { pin: 6, name: 'ENA', type: 'input', desc: 'Bridge A Enable / PWM Speed Control' },
+      { pin: 7, name: 'IN2', type: 'input', desc: 'Bridge A Direction Input 2' },
+      { pin: 8, name: 'GND', type: 'ground', desc: 'Logic and Power Ground' },
+      { pin: 9, name: 'VSS', type: 'power', desc: 'Logic Supply (+5V)' },
+      { pin: 10, name: 'IN3', type: 'input', desc: 'Bridge B Direction Input 1' },
+      { pin: 11, name: 'ENB', type: 'input', desc: 'Bridge B Enable / PWM Speed Control' },
+      { pin: 12, name: 'IN4', type: 'input', desc: 'Bridge B Direction Input 2' },
+      { pin: 13, name: 'OUT3', type: 'output', desc: 'Motor B Lead 1' },
+      { pin: 14, name: 'OUT4', type: 'output', desc: 'Motor B Lead 2' },
+      { pin: 15, name: 'CURRENT SENSE B', type: 'analog', desc: 'Sense resistor connection for Bridge B' }
+    ],
+    commonSources: 'Dot matrix printers, office copiers, old RC toy cars, automated cash registers.',
+    equivalents: ['L293D (lower current 600mA in DIP-16)', 'TB6612FNG (modern high-efficiency MOSFET driver)', 'DRV8833'],
+    datasheetUrl: 'https://www.st.com/resource/en/datasheet/l298.pdf',
+    salvageTips: 'Because of bipolar junction drops, it gets hot. Always salvage the aluminum fin heatsink along with the chip!',
+    typicalSalvagePrice: 3.5
+  },
+  {
+    id: 'ext-ds18b20',
+    partNumber: 'DS18B20 / DS18S20',
+    name: 'Programmable Resolution 1-Wire Digital Temperature Sensor',
+    category: 'sensor',
+    packageType: 'TO-92 / Stainless Steel Probe',
+    description: 'Precision digital thermometer reporting temperatures from -55°C to +125°C over a single digital communication line (Dallas 1-Wire). Each device has a unique 64-bit factory ROM code.',
+    keySpecs: {
+      'Measurement Range': '-55°C to +125°C',
+      'Accuracy': '±0.5°C accuracy from -10°C to +85°C',
+      'Configurable Resolution': '9 to 12 bits (0.0625°C step)',
+      'Interface': '1-Wire Digital Bus (needs 4.7kΩ pullup to 5V/3.3V)'
+    },
+    pinCount: 3,
+    pinout: [
+      { pin: 1, name: 'GND', type: 'ground', desc: 'Ground Reference 0V' },
+      { pin: 2, name: 'DQ', type: 'io', desc: 'Data Input/Output (requires 4.7k pullup resistor)' },
+      { pin: 3, name: 'VDD', type: 'power', desc: 'Power Supply (+3.0V to +5.5V, supports parasite power)' }
+    ],
+    commonSources: 'HVAC thermostats, smart aquarium monitors, coffee machines, server rack temperature monitors.',
+    equivalents: ['TMP36 (analog output)', 'LM35 (10mV per degree C analog)', 'DHT22 / AM2302'],
+    datasheetUrl: 'https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf',
+    salvageTips: 'Multiple DS18B20 sensors can share the exact same pin wire on your microcontroller due to individual 64-bit addresses.',
+    typicalSalvagePrice: 2.0
+  },
+  {
+    id: 'ext-ws2812b',
+    partNumber: 'WS2812B / NeoPixel / SK6812',
+    name: 'Intelligent Control RGB SMD 5050 LED with Integrated Driver',
+    category: 'display',
+    packageType: 'SMD 5050 (5.0mm x 5.0mm)',
+    description: 'Individually addressable RGB LED containing a precision constant current driver and internal control chip. Requires only 1 digital data pin to control thousands of LEDs with 24-bit true color.',
+    keySpecs: {
+      'Power Supply': '3.5V to 5.3V DC (+5V nominal)',
+      'Data Rate': '800 Kbps high-speed NZR protocol',
+      'Color Depth': '256 grayscale levels per color (16.7M colors total)',
+      'Current Draw': '~60 mA per pixel at full white'
+    },
+    pinCount: 4,
+    pinout: [
+      { pin: 1, name: 'VDD', type: 'power', desc: '+5V Power Supply Terminal' },
+      { pin: 2, name: 'DOUT', type: 'output', desc: 'Data Cascade Output (connects to DIN of next pixel)' },
+      { pin: 3, name: 'VSS', type: 'ground', desc: 'Ground Terminal' },
+      { pin: 4, name: 'DIN', type: 'input', desc: 'Data Signal Input' }
+    ],
+    commonSources: 'RGB computer fans, gaming keyboard backlights, TV ambient light strips, party novelty lighting.',
+    equivalents: ['APA102 / DotStar (SPI with separate clock)', 'SK6812 (RGBW option)', 'WS2811 (external IC driving raw LEDs)'],
+    datasheetUrl: 'https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf',
+    salvageTips: 'Add a 330Ω to 470Ω resistor on the microcontroller data pin and a 1000µF capacitor across the 5V power leads to prevent surge damage.',
+    typicalSalvagePrice: 0.3
+  },
+  {
+    id: 'ext-ssd1306',
+    partNumber: 'SSD1306 / 0.96 OLED',
+    name: '128x64 Dot Matrix OLED Graphic Display Driver',
+    category: 'display',
+    packageType: 'COF / 4-pin I2C Module',
+    description: 'High-contrast monochrome OLED display module. Emits its own light with zero backlight power bleed. Ultra-wide viewing angle (>160°) and low power consumption over standard I2C.',
+    keySpecs: {
+      'Resolution': '128 × 64 pixels',
+      'Operating Voltage': '3.3V to 5.0V (built-in charge pump boost)',
+      'Communication': 'I2C default address 0x3C (or 0x3D)',
+      'Display Colors': 'White, Blue, or Yellow-Blue dual-tone'
+    },
+    pinCount: 4,
+    pinout: [
+      { pin: 1, name: 'GND', type: 'ground', desc: 'Ground Reference 0V' },
+      { pin: 2, name: 'VCC', type: 'power', desc: 'Supply Voltage (+3.3V or +5V)' },
+      { pin: 3, name: 'SCL', type: 'input', desc: 'I2C Serial Clock Line' },
+      { pin: 4, name: 'SDA', type: 'io', desc: 'I2C Serial Data Line' }
+    ],
+    commonSources: 'Fitness trackers, digital vape mods, 3D printer smart controllers, crypto hardware wallets.',
+    equivalents: ['SH1106 (1.3" OLED)', 'SSD1309 (2.42" large OLED)', 'ST7735 (1.8" Color TFT)'],
+    datasheetUrl: 'https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf',
+    salvageTips: 'Be gentle with the glass ribbon cable! Glass cracks easily if pried with metal screwdrivers; use warm air to soften glue.',
+    typicalSalvagePrice: 3.8
+  },
+  {
+    id: 'ext-2n2222',
+    partNumber: '2N2222 / 2N2222A / PN2222',
+    name: 'High-Speed NPN General Purpose Switching BJT',
+    category: 'power',
+    packageType: 'TO-92 / TO-18 Metal Can',
+    description: 'The ubiquitous NPN bipolar transistor. Fast switching speeds up to 250 MHz and current handling up to 800mA. Used for relay driving, buzzer control, RF oscillator buffers, and audio preamps.',
+    keySpecs: {
+      'Collector-Emitter Voltage (Vceo)': '40 V Max',
+      'Collector Current (Ic)': '800 mA Continuous',
+      'DC Current Gain (hFE)': '100 to 300',
+      'Transition Frequency (fT)': '250 to 300 MHz'
+    },
+    pinCount: 3,
+    pinout: [
+      { pin: 1, name: 'EMITTER', type: 'ground', desc: 'Emitter lead (connect to Ground for low-side switch)' },
+      { pin: 2, name: 'BASE', type: 'input', desc: 'Base control (add 1kΩ resistor from MCU pin)' },
+      { pin: 3, name: 'COLLECTOR', type: 'output', desc: 'Collector lead (connects to load negative)' }
+    ],
+    commonSources: 'AM/FM radios, landline telephones, CRT televisions, toy remote controllers, computer PSU standby boards.',
+    equivalents: ['2N3904 (lower 200mA current)', 'BC547 / BC548 (European pinout CBE)', 'SS8050 (higher 1.5A current)'],
+    datasheetUrl: 'https://www.onsemi.com/pdf/datasheet/p2n2222a-d.pdf',
+    salvageTips: 'Beware pinout differences: 2N2222 in TO-92 is E-B-C looking at the flat face, while BC547 is C-B-E!',
+    typicalSalvagePrice: 0.25
+  },
+  {
+    id: 'ext-lm7805',
+    partNumber: 'LM7805 / MC7805 / L7805CV',
+    name: 'Positive 5V 1.5A Fixed Linear Voltage Regulator',
+    category: 'power',
+    packageType: 'TO-220',
+    description: 'The industry standard 5V fixed regulator. Takes 7V to 35V unregulated DC and outputs rock-solid 5.0V with built-in internal thermal overload and short-circuit current limiting.',
+    keySpecs: {
+      'Output Voltage': '5.0V ± 4%',
+      'Input Voltage Range': '7.0V to 35V DC',
+      'Max Output Current': '1.5 A (with heatsink)',
+      'Dropout Voltage': '2.0V typical'
+    },
+    pinCount: 3,
+    pinout: [
+      { pin: 1, name: 'INPUT', type: 'power', desc: 'Unregulated DC Input (+7V to +35V)' },
+      { pin: 2, name: 'GND', type: 'ground', desc: 'Ground Reference (also tied to heat sink tab)' },
+      { pin: 3, name: 'OUTPUT', type: 'power', desc: 'Regulated +5.0V Output' }
+    ],
+    commonSources: 'Arcade machines, retro consoles, car 12V adapters, desktop computer peripherals, alarm panels.',
+    equivalents: ['LM7812 (12V version)', 'AMS1117-5.0 (Low dropout SMD)', 'MP1584 / TSR 1-2450 (High-efficiency drop-in switching regulator)'],
+    datasheetUrl: 'https://www.sparkfun.com/datasheets/Components/LM7805.pdf',
+    salvageTips: 'Add 330nF capacitor on input and 100nF on output to prevent high-frequency parasitic oscillation.',
+    typicalSalvagePrice: 1.5
+  }
+];
