@@ -177,6 +177,8 @@ export const Header: React.FC<HeaderProps> = ({
           {navItems.map(item => (
             <button
               key={item.id}
+              data-testid={`tab-${item.id}`}
+              data-state={activeTab === item.id ? 'ready' : 'idle'}
               onClick={() => onTabChange(item.id)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-colors cursor-pointer shrink-0 ${
                 activeTab === item.id
