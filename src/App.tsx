@@ -139,6 +139,9 @@ export default function App() {
       )}
 
       {/* Main App Navigation Header */}
+      <div data-testid="foundation-stack-warning" data-state="ready" role="status" className="px-4 py-2 text-xs font-mono bg-amber-950 text-amber-200 border-b border-amber-800">
+        AUTH / CONVEX NOT IMPLEMENTED — this Vite prototype is not yet compliant with the required TanStack Start + Convex stack.
+      </div>
       <Header
         activeTab={activeTab}
         onTabChange={setActiveTab}
